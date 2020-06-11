@@ -18,13 +18,10 @@ $folderLocation = ""
 $rarProgramPath = "C:\Program Files\WinRAR\Rar.exe"
 $desitination = $backupFullName + '.rar'; # 產生於working directory
 $source = $folderName
-Get-Item -LiteralPath $desitination | Remove-Item # 有就會刪除
-$argumentStr = "a $desitination $source" # 壓縮前最好先移除現有的同名壓縮檔, 因為目標中多的檔案不會被移除
+Get-Item -LiteralPath $desitination | Remove-Item # 有就會刪除，壓縮前最好先移除現有的同名壓縮檔, 因為目標中多的檔案不會被移除
+$argumentStr = "a $desitination $source" # cmd中是 -a destination source ，但ps則不加減號
 
 
-# cmd中是
-#   -a destination source
-# 但ps則不加減號
 Start-Process -FilePath $rarProgramPath -ArgumentList $argumentStr -Wait
 
 "壓縮成功～！"
